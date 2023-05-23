@@ -1,0 +1,26 @@
+
+pipeline{
+    agent{label 'slave1'}
+    stages{
+        stage('clone'){
+            steps{
+                sh "pwd"
+               git url:"https://github.com/Jamunamn/my-sample-website.git", credentialsId:"private_clone1", branch:"master"
+            }
+        }
+        
+        stage('build'){
+            steps{
+                sh "mvn clean install"
+                
+            }
+        }
+        stage('deploy'){
+            steps{
+                sh "pwd"
+                sh "cp /webapp/target/webapp.war /home/ec2-user/apache-tomcat-8.0.15/webapps"
+            }
+        }
+        
+    }
+}

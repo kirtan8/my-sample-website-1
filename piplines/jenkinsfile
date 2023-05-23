@@ -22,5 +22,15 @@ pipeline{
             }
         }
         
+        
+        stage('email'){
+         steps {
+           emailext to: 'abc@gmail.com', subject: 'job execution', body: 'your job has completed the execution. Please check the console logs for the status of the job.'
+         
+         }
+        }
+        
+        
+        
     }
 }
